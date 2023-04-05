@@ -2,30 +2,37 @@
 
 {% block content %}
 
+<!--<form method="POST">-->
+<!--    {% csrf_token %}-->
+<!--    <label for="give">-->
+<!--        Отдаете:-->
+<!--    <select name="give" id="give">-->
+<!--        {% for cur in currencies %}-->
+<!--        <option value="{{ cur }}">{{ cur }}</option>-->
+<!--        {% endfor %}-->
+<!--    </select>-->
+
+<!--    </label>-->
+<!--        <label for="receive">-->
+<!--        Получаете:-->
+<!--    <select name="receive" id="receive">-->
+<!--        {% for cur in currencies %}-->
+<!--        <option value="{{ cur }}">{{ cur }}</option>-->
+<!--        {% endfor %}-->
+<!--    </select>-->
+<!--    </label>-->
+
+<!--    <label>Сумма: <input name='amount' type="number"></label>-->
+<!--    <button type="submit">Посчитать</button>-->
+<!--</form>-->
+
 <form method="POST">
     {% csrf_token %}
-    <label for="give">
-        Отдаете:
-    <select name="give" id="give">
-        {% for cur in currencies %}
-        <option value="{{ cur }}">{{ cur }}</option>
-        {% endfor %}
-    </select>
-
-    </label>
-        <label for="receive">
-        Получаете:
-    <select name="receive" id="receive">
-        {% for cur in currencies %}
-        <option value="{{ cur }}">{{ cur }}</option>
-        {% endfor %}
-    </select>
-    </label>
-
-    <label>Сумма: <input name='amount' type="number"></label>
+    {% for f in form %}
+        {{ f.label }}: {{ f }}
+    {% endfor %}
     <button type="submit">Посчитать</button>
 </form>
-
 
 {% if result %}
     <h2>{{ result }}</h2>
