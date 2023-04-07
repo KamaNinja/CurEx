@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from .services import currencies
 from .forms import ExchangeForm
+from .services import currencies
 
 
 def index(request):
@@ -19,8 +19,9 @@ def index(request):
             else:
                 result = currencies[give]['Cur_OfficialRate'] / currencies[give]['Cur_Scale'] * amount / \
                          currencies[receive]['Cur_OfficialRate'] * currencies[receive]['Cur_Scale']
+            currency = currencies[receive]['Cur_Abbreviation']
 
-            return render(request, 'main/index.html', {'result': result, 'currencies': currencies, 'form': form})
+            return render(request, 'main/index.html', {'form': form, 'result': result, 'currency': currency})
 
     form = ExchangeForm()
     return render(request, 'main/index.html', {'title': 'CurEx', 'currencies': currencies, 'form': form})

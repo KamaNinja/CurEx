@@ -2,40 +2,22 @@
 
 {% block content %}
 
-<!--<form method="POST">-->
-<!--    {% csrf_token %}-->
-<!--    <label for="give">-->
-<!--        Отдаете:-->
-<!--    <select name="give" id="give">-->
-<!--        {% for cur in currencies %}-->
-<!--        <option value="{{ cur }}">{{ cur }}</option>-->
-<!--        {% endfor %}-->
-<!--    </select>-->
-
-<!--    </label>-->
-<!--        <label for="receive">-->
-<!--        Получаете:-->
-<!--    <select name="receive" id="receive">-->
-<!--        {% for cur in currencies %}-->
-<!--        <option value="{{ cur }}">{{ cur }}</option>-->
-<!--        {% endfor %}-->
-<!--    </select>-->
-<!--    </label>-->
-
-<!--    <label>Сумма: <input name='amount' type="number"></label>-->
-<!--    <button type="submit">Посчитать</button>-->
-<!--</form>-->
-
-<form method="POST">
-    {% csrf_token %}
-    {% for f in form %}
-        {{ f.label }}: {{ f }}
-    {% endfor %}
-    <button type="submit">Посчитать</button>
-</form>
-
-{% if result %}
-    <h2>{{ result }}</h2>
-{% endif %}
+<div class="container">
+    <h1 class="title">
+        <a href="{% url 'home' %}">Конвертер валют</a>
+    </h1>
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            {% for f in form %}
+            {{ f }}
+            {% endfor %}
+        </div>
+        <button type="submit">Посчитать</button>
+    </form>
+    {% if result %}
+    <p class="result">{{ result|floatformat:"2g" }} {{ currency }}</p>
+    {% endif %}
+</div>
 
 {% endblock %}
